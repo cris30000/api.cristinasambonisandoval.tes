@@ -10,7 +10,7 @@ class CompanygraduateController extends Controller
     /**
      * Display a listing of the resource.
      */
-      public function index()
+        public function index()
     {
         // $category = Category::included()->findOrFail(2);
         // $categories=Category::included()->get();
@@ -29,8 +29,8 @@ class CompanygraduateController extends Controller
         //version mejorarada
          return response()->json([
             'status' => true,
-            'message' => 'Listado de graduados de empresas',
-            'data' => $companygraduate
+            'message' => 'Listado de graduados',
+            'data' => $companygraduate  
         ], 200);
     
     }
@@ -48,12 +48,12 @@ class CompanygraduateController extends Controller
             'nombreempresa' => 'required|max:255',
         ]);
 
-        $companygraduate = Companygraduate($request->all());
+        $companygraduate = Companygraduate::create($request->all());
 
         //return response()->json($armyCorp,201);
         return response()->json([
             'status' => true,
-            'message' => 'Empresa  creada correctamente',
+            'message' => 'Graduado creado correctamente',
             'data' => $companygraduate
         ], 201);
     }
@@ -72,8 +72,8 @@ class CompanygraduateController extends Controller
         // $armyCorp = ArmyCorp::with(['posts'])->findOrFail($id);
         return response()->json([
             'status' => true,
-            'message' => 'Graduado de empresa encontrado correctamente',
-            'data' => $companygraduate          
+            'message' => 'Graduado encontrado correctamente',
+            'data' => $companygraduate
         ], 200);
     }
 
@@ -88,7 +88,7 @@ class CompanygraduateController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Graduado de empresa actualizado correctamente',
+            'message' => 'Graduado actualizado correctamente',
             'data' => $companygraduate
         ], 200);
     }
@@ -99,7 +99,7 @@ class CompanygraduateController extends Controller
         $companygraduate->delete();
         return response()->json([
             'status' => true,
-            'message' => 'Graduado de empresa eliminado correctamente'
+            'message' => 'Graduado eliminado correctamente'
         ], 200 );
     }
 }
