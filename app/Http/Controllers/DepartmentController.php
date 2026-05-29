@@ -19,7 +19,7 @@ class DepartmentController extends Controller
         //$categories = Category::all();
         //$categories = Category::with(['posts.user'])->get();
 
-        $company=Company::included()
+        $department=Department::included()
         ->filter()
         ->sort()
         ->getOrPaginate();
@@ -29,8 +29,8 @@ class DepartmentController extends Controller
         //version mejorarada
          return response()->json([
             'status' => true,
-            'message' => 'Listado de cuerpos militares',
-            'data' => $company
+            'message' => 'Listado de departamentos',
+            'data' => $department
         ], 200);
     
     }
@@ -48,23 +48,23 @@ class DepartmentController extends Controller
             'nombreempresa' => 'required|max:255',
         ]);
 
-        $company = Company::create($request->all());
+        $department = Department::create($request->all());
 
         //return response()->json($armyCorp,201);
         return response()->json([
             'status' => true,
-            'message' => 'Empresa  creada correctamente',
-            'data' => $company
+            'message' => 'Departamento creado correctamente',
+            'data' => $department
         ], 201);
     }
 
     /**
      * MOSTRAR UN REGISTRO ESPECIFICO
      *
-     * @param  \App\Models\Company  $armyCorp
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company) //si se pasa $id se utiliza la comentada
+    public function show(Department $department) //si se pasa $id se utiliza la comentada
     {
        
      //si se pasa $id se utiliza la comentada
@@ -72,34 +72,34 @@ class DepartmentController extends Controller
         // $armyCorp = ArmyCorp::with(['posts'])->findOrFail($id);
         return response()->json([
             'status' => true,
-            'message' => 'Compañia encontrado correctamente',
-            'data' => $company
+            'message' => 'Departamento encontrado correctamente',
+            'data' => $department
         ], 200);
     }
 
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Department $department)
     {
         $request->validate([
             'nombreempresa' => 'required|max:255',
             
         ]);
 
-        $company->update($request->all());
+        $department->update($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Empresa actualizado correctamente',
-            'data' => $company
+            'message' => 'Departamento actualizado correctamente',
+            'data' => $department
         ], 200);
     }
 
 // eliminar registro
-    public function destroy(Company $company)
+    public function destroy(Department $department)
     {
-        $company->delete();
+        $department->delete();
         return response()->json([
             'status' => true,
-            'message' => 'Compañia eliminado correctamente'
+            'message' => 'Departamento eliminado correctamente'
         ], 200 );
     }
 }

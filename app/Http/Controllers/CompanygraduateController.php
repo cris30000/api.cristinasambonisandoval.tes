@@ -19,7 +19,7 @@ class CompanygraduateController extends Controller
         //$categories = Category::all();
         //$categories = Category::with(['posts.user'])->get();
 
-        $company=Company::included()
+        $companygraduate=Companygraduate::included()
         ->filter()
         ->sort()
         ->getOrPaginate();
@@ -29,8 +29,8 @@ class CompanygraduateController extends Controller
         //version mejorarada
          return response()->json([
             'status' => true,
-            'message' => 'Listado de cuerpos militares',
-            'data' => $company
+            'message' => 'Listado de graduados de empresas',
+            'data' => $companygraduate
         ], 200);
     
     }
@@ -48,23 +48,23 @@ class CompanygraduateController extends Controller
             'nombreempresa' => 'required|max:255',
         ]);
 
-        $company = Company::create($request->all());
+        $companygraduate = Companygraduate($request->all());
 
         //return response()->json($armyCorp,201);
         return response()->json([
             'status' => true,
             'message' => 'Empresa  creada correctamente',
-            'data' => $company
+            'data' => $companygraduate
         ], 201);
     }
 
     /**
      * MOSTRAR UN REGISTRO ESPECIFICO
      *
-     * @param  \App\Models\Company  $armyCorp
+     * @param  \App\Models\Companygraduate  $companygraduate
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company) //si se pasa $id se utiliza la comentada
+    public function show(Companygraduate $companygraduate) //si se pasa $id se utiliza la comentada
     {
        
      //si se pasa $id se utiliza la comentada
@@ -72,34 +72,34 @@ class CompanygraduateController extends Controller
         // $armyCorp = ArmyCorp::with(['posts'])->findOrFail($id);
         return response()->json([
             'status' => true,
-            'message' => 'Compañia encontrado correctamente',
-            'data' => $company
+            'message' => 'Graduado de empresa encontrado correctamente',
+            'data' => $companygraduate          
         ], 200);
     }
 
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Companygraduate $companygraduate)
     {
         $request->validate([
             'nombreempresa' => 'required|max:255',
             
         ]);
 
-        $company->update($request->all());
+        $companygraduate->update($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Empresa actualizado correctamente',
-            'data' => $company
+            'message' => 'Graduado de empresa actualizado correctamente',
+            'data' => $companygraduate
         ], 200);
     }
 
 // eliminar registro
-    public function destroy(Company $company)
+    public function destroy(Companygraduate $companygraduate)
     {
-        $company->delete();
+        $companygraduate->delete();
         return response()->json([
             'status' => true,
-            'message' => 'Compañia eliminado correctamente'
+            'message' => 'Graduado de empresa eliminado correctamente'
         ], 200 );
     }
 }

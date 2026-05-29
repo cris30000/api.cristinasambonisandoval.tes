@@ -19,7 +19,7 @@ class CountryController extends Controller
         //$categories = Category::all();
         //$categories = Category::with(['posts.user'])->get();
 
-        $company=Company::included()
+        $country=Country::included()
         ->filter()
         ->sort()
         ->getOrPaginate();
@@ -29,8 +29,8 @@ class CountryController extends Controller
         //version mejorarada
          return response()->json([
             'status' => true,
-            'message' => 'Listado de cuerpos militares',
-            'data' => $company
+            'message' => 'Listado de países',
+            'data' => $country  
         ], 200);
     
     }
@@ -48,23 +48,23 @@ class CountryController extends Controller
             'nombreempresa' => 'required|max:255',
         ]);
 
-        $company = Company::create($request->all());
+        $country = Country::create($request->all());
 
         //return response()->json($armyCorp,201);
         return response()->json([
             'status' => true,
-            'message' => 'Empresa  creada correctamente',
-            'data' => $company
+            'message' => 'País creado correctamente',
+            'data' => $country
         ], 201);
     }
 
     /**
      * MOSTRAR UN REGISTRO ESPECIFICO
      *
-     * @param  \App\Models\Company  $armyCorp
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company) //si se pasa $id se utiliza la comentada
+    public function show(Country $country) //si se pasa $id se utiliza la comentada
     {
        
      //si se pasa $id se utiliza la comentada
@@ -72,34 +72,34 @@ class CountryController extends Controller
         // $armyCorp = ArmyCorp::with(['posts'])->findOrFail($id);
         return response()->json([
             'status' => true,
-            'message' => 'Compañia encontrado correctamente',
-            'data' => $company
+            'message' => 'País encontrado correctamente',
+            'data' => $country
         ], 200);
     }
 
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Country $country)
     {
         $request->validate([
             'nombreempresa' => 'required|max:255',
             
         ]);
 
-        $company->update($request->all());
+        $country->update($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Empresa actualizado correctamente',
-            'data' => $company
+            'message' => 'País actualizado correctamente',
+            'data' => $country
         ], 200);
     }
 
 // eliminar registro
-    public function destroy(Company $company)
+    public function destroy(Country $country)
     {
-        $company->delete();
+        $country->delete();
         return response()->json([
             'status' => true,
-            'message' => 'Compañia eliminado correctamente'
+            'message' => 'País   eliminado correctamente'
         ], 200 );
     }
 }

@@ -19,7 +19,7 @@ class TitleController extends Controller
         //$categories = Category::all();
         //$categories = Category::with(['posts.user'])->get();
 
-        $company=Company::included()
+        $title=Title::included()
         ->filter()
         ->sort()
         ->getOrPaginate();
@@ -30,7 +30,7 @@ class TitleController extends Controller
          return response()->json([
             'status' => true,
             'message' => 'Listado de cuerpos militares',
-            'data' => $company
+            'data' => $title
         ], 200);
     
     }
@@ -45,26 +45,26 @@ class TitleController extends Controller
     {
 
         $request->validate([
-            'nombreempresa' => 'required|max:255',
+            'title' => 'required|max:255',
         ]);
 
-        $company = Company::create($request->all());
+        $title = Title::create($request->all());
 
         //return response()->json($armyCorp,201);
         return response()->json([
             'status' => true,
-            'message' => 'Empresa  creada correctamente',
-            'data' => $company
+            'message' => 'Título creado correctamente',
+            'data' => $title
         ], 201);
     }
 
     /**
      * MOSTRAR UN REGISTRO ESPECIFICO
      *
-     * @param  \App\Models\Company  $armyCorp
+     * @param  \App\Models\Title  $title
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company) //si se pasa $id se utiliza la comentada
+    public function show(Title $title) //si se pasa $id se utiliza la comentada
     {
        
      //si se pasa $id se utiliza la comentada
@@ -72,34 +72,34 @@ class TitleController extends Controller
         // $armyCorp = ArmyCorp::with(['posts'])->findOrFail($id);
         return response()->json([
             'status' => true,
-            'message' => 'Compañia encontrado correctamente',
-            'data' => $company
+            'message' => 'Título encontrado correctamente',
+            'data' => $title
         ], 200);
     }
 
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Title $title)
     {
         $request->validate([
-            'nombreempresa' => 'required|max:255',
+            'title' => 'required|max:255',
             
         ]);
 
-        $company->update($request->all());
+        $title->update($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Empresa actualizado correctamente',
-            'data' => $company
+            'message' => 'Título actualizado correctamente',
+            'data' => $title
         ], 200);
     }
 
 // eliminar registro
-    public function destroy(Company $company)
+    public function destroy(Title $title)
     {
-        $company->delete();
+        $title->delete();
         return response()->json([
             'status' => true,
-            'message' => 'Compañia eliminado correctamente'
+            'message' => 'Título eliminado correctamente'
         ], 200 );
     }
 }
